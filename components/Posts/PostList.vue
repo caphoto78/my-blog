@@ -1,22 +1,13 @@
 <template>
   <section class="posts-list">
     <PostPreview
-      id="1"
-      thumbnail="https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-      title="Hello There!"
-      previewText="This is my first post!"
-    />
-    <PostPreview
-      id="2"
-      thumbnail="https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-      title="Hello there - the second time!"
-      previewText="This is my second post!"
-    />
-    <PostPreview
-      id="3"
-      thumbnail="https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-      title="Hi!"
-      previewText="This is my third post!"
+      v-for="post in posts"
+      :key="post.id"
+      :id="post.id"
+      :is-admin="isAdmin"
+      :thumbnail="post.thumbnail"
+      :title="post.title"
+      :previewText="post.previewText"
     />
   </section>
 </template>
@@ -25,9 +16,18 @@
 import PostPreview from '@/components/Posts/PostPreview'
 
 export default {
-  name: 'PostList',
   components: {
     PostPreview
+  },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
+    posts: {
+      type: Array,
+      required: true
+    }
   }
 }
 </script>
