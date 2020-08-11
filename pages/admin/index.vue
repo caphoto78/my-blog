@@ -1,6 +1,7 @@
 <template>
   <div class="admin-page">
     <section class="new-post">
+      <AppButton style="margin-right: 10px" @click="$router.push('/')">Home</AppButton>
       <AppButton @click="$router.push('/admin/new-post')">Create Post</AppButton>
       <AppButton style="margin-left: 10px" @click="onLogout">Logout</AppButton>
     </section>

@@ -68,9 +68,6 @@ export default {
     name: 'fade',
     mode: 'out-in'
   },
-  /* router: {
-    middleware: 'log'
-  } */
   serverMiddleware: [
     bodyParser.json(),
     '~/api'
@@ -90,5 +87,5 @@ export default {
         return routes
       })
     }
-  }
+  },
 }

@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-  .single-post-page {
+  .single-page-post {
   padding: 30px;
   text-align: center;
   box-sizing: border-box;
@@ -46,6 +46,11 @@ export default {
 
 .post {
   width: 100%;
+}
+
+.post-content {
+  text-align: justify;
+  padding-bottom: 30px;
 }
 
 @media (min-width: 768px) {
@@ -57,6 +62,7 @@ export default {
 
 .post-title {
   margin: 0;
+  text-align: center;
 }
 
 .post-details {

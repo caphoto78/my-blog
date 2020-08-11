@@ -10,6 +10,8 @@
 
 <style scoped>
   .about-page {
+    width: 70%;
+    margin: auto;
     text-align: center;
     padding: 30px;
   }
