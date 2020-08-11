@@ -13,14 +13,16 @@ import AdminPostForm from '@/components/Admin/AdminPostForm'
 
 export default {
   layout: 'admin',
+  middleware: ['check-auth', 'auth'],
   components: {
     AdminPostForm
   },
   methods: {
     onSubmitted(postData) {
-      axios.post('https://nuxt-blog-6e81f.firebaseio.com/posts.json', { ...postData, updatedDate: new Date() })
-        .then(result => console.log(result))
-        .catch(e => console.log(e))
+      this.$store.dispatch('addPost', postData)
+        .then(() => {
+          this.$router.push('/admin')
+        })
     }
   }
 }

@@ -1,3 +1,5 @@
+const bodyParser = require('body-parser')
+const axios = require('axios')
 
 export default {
   /*
@@ -25,12 +27,15 @@ export default {
   ** Global CSS
   */
   css: [
+    '~assets/styles/main.css'
   ],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '~plugins/core-components.js',
+    '~plugins/date-filter.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -41,11 +46,49 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
   ],
+  axios: {
+    baseURL: process.env.BASE_URL || 'https://nuxt-blog-6e81f.firebaseio.com',
+    credentials: false
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-6e81f.firebaseio.com',
+    fbAPIKey: 'AIzaSyBNfqC9S_t0FpbQJCyC8y30pWuRjL9sEdA'
+  },
+
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
+  /* router: {
+    middleware: 'log'
+  } */
+  serverMiddleware: [
+    bodyParser.json(),
+    '~/api'
+  ],
+  generate: {
+    routes: function() {
+      return axios.get('https://nuxt-blog-6e81f.firebaseio.com/posts.json')
+      .then(res => {
+        const routes = []
+        for (const key in res.data) {
+          routes.push({
+            route: '/posts/' + key,
+            payload: {
+              postData: res.data[key]
+            }})
+        }
+        return routes
+      })
+    }
   }
 }
